@@ -1,5 +1,4 @@
 destination: docs/
-url: https://osfr.surge.sh
 title: "osfr: An R interface to OSF"
 
 development:
