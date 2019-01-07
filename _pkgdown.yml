@@ -1,9 +1,11 @@
 destination: docs/
 title: "osfr: An R interface to OSF"
 
-development:
-  mode: auto
-
 template:
   params:
     noindex: true
+
+navbar:
+  structure:
+    left:  [home, reference]
+    right: [github]
