@@ -2,10 +2,6 @@ language: r
 os: linux
 cache: packages
 
-script:
-- R CMD build . --no-build-vignettes
-- R CMD check *tar.gz --ignore-vignettes --no-tests
-
 jobs:
   include:
   - r: oldrel
