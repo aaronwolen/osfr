@@ -1,0 +1,10 @@
+pandoc: '2.2'
+pkgdown: 1.4.1
+pkgdown_sha: ~
+articles:
+  auth: auth.html
+  getting_started: getting_started.html
+urls:
+  reference: https://aaronwolen.github.io/osfr//reference
+  article: https://aaronwolen.github.io/osfr//articles
+
