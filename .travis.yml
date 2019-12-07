@@ -17,6 +17,7 @@ jobs:
     - cat osfr.log
     before_deploy:
     - Rscript -e 'dir(recursive = TRUE)' && Rscript -e 'remotes::install_cran("pkgdown")'
+    deploy:
       provider: script
       script: Rscript -e 'dir(recursive = TRUE)' && Rscript -e 'pkgdown::deploy_site_github(verbose = TRUE)'
       skip_cleanup: true
