@@ -94,7 +94,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Getting Started with osfr</h1>
             
-            <h4 class="date">2020-05-20</h4>
+            <h4 class="date">2020-05-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/aaronwolen/osfr/blob/master/vignettes/getting_started.Rmd"><code>vignettes/getting_started.Rmd</code></a></small>
       <div class="hidden name"><code>getting_started.Rmd</code></div>
@@ -130,7 +130,7 @@
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;   name                       id    meta            </span>
 <span class="co">#&gt;   &lt;chr&gt;                      &lt;chr&gt; &lt;list&gt;          </span>
-<span class="co">#&gt; 1 Motor Trend Car Road Tests pgx4k &lt;named list [3]&gt;</span></pre></body></html></div>
+<span class="co">#&gt; 1 Motor Trend Car Road Tests 5kcuj &lt;named list [3]&gt;</span></pre></body></html></div>
 <p>To view the project directly on OSF use <code><a href="../reference/osf_open.html">osf_open(car_project)</a></code>.</p>
 <p>After the project is created we’ll create two nested <em>components</em>, one for data and one for analysis scripts. We can take advantage of osfr’s <a href="https://magrittr.tidyverse.org">pipe</a>-compatibility to arrange multiple operations into a single sequence.</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">scripts_comp</span> <span class="kw">&lt;-</span> <span class="no">car_project</span> <span class="kw">%&gt;%</span>
@@ -144,15 +144,15 @@
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;   name             id    meta            </span>
 <span class="co">#&gt;   &lt;chr&gt;            &lt;chr&gt; &lt;list&gt;          </span>
-<span class="co">#&gt; 1 Analysis Scripts xg5d4 &lt;named list [3]&gt;</span></pre></body></html></div>
+<span class="co">#&gt; 1 Analysis Scripts x5tcv &lt;named list [3]&gt;</span></pre></body></html></div>
 <p>We can verify the project is now structured the way we wanted by listing the components we have under the main project.</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">car_components</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/osf_ls_nodes.html">osf_ls_nodes</a></span>(<span class="no">car_project</span>)
 <span class="no">car_components</span>
 <span class="co">#&gt; # A tibble: 2 x 3</span>
 <span class="co">#&gt;   name             id    meta            </span>
 <span class="co">#&gt;   &lt;chr&gt;            &lt;chr&gt; &lt;list&gt;          </span>
-<span class="co">#&gt; 1 Analysis Scripts xg5d4 &lt;named list [3]&gt;</span>
-<span class="co">#&gt; 2 Data             swnhj &lt;named list [3]&gt;</span></pre></body></html></div>
+<span class="co">#&gt; 1 Analysis Scripts x5tcv &lt;named list [3]&gt;</span>
+<span class="co">#&gt; 2 Data             tj5wz &lt;named list [3]&gt;</span></pre></body></html></div>
 <p>Remember, new projects are always private by default. You can change this by opening the project on OSF and <a href="https://help.osf.io/hc/en-us/articles/360018981414-control-your-privacy-settings">making it public</a>, and <a href="https://help.osf.io/hc/en-us/articles/360019931013-Create-DOIs">even generate a DOI</a> so others can cite your work.</p>
 </div>
 </div>
@@ -177,7 +177,7 @@
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;   name       id                       meta            </span>
 <span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt;                    &lt;list&gt;          </span>
-<span class="co">#&gt; 1 mtcars.csv 5ec57682f78ed000097d425b &lt;named list [3]&gt;</span></pre></body></html></div>
+<span class="co">#&gt; 1 mtcars.csv 5eceb2373768070009cc54ea &lt;named list [3]&gt;</span></pre></body></html></div>
 <p>The <code>mtcars_file</code> object now contains an <code>osf_tbl</code> with 1 row corresponding to the version of that file stored on OSF. We can also use <code><a href="../reference/osf_open.html">osf_open()</a></code> to examine the file directly on OSF, which provides rendered views for a wide variety of file formats.</p>
 <p>OSF also version controls files, which means that if we were to make a change to the <code>mtcars.csv</code> file (perhaps we collected more data) we could automatically create a 2nd version of the dataset by using the <code><a href="../reference/osf_upload.html">osf_upload()</a></code> function and setting <code>conflicts = "overwrite"</code>. As long as the file we’re uploading has the same file name as a file in that particular section of the project, a new version will be created.</p>
 </div>
@@ -194,7 +194,7 @@
 <span class="co">#&gt; # A tibble: 1 x 4</span>
 <span class="co">#&gt;   name       id                       local_path   meta            </span>
 <span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt;                    &lt;chr&gt;        &lt;list&gt;          </span>
-<span class="co">#&gt; 1 mtcars.csv 5ec57682f78ed000097d425b ./mtcars.csv &lt;named list [3]&gt;</span></pre></body></html></div>
+<span class="co">#&gt; 1 mtcars.csv 5eceb2373768070009cc54ea ./mtcars.csv &lt;named list [3]&gt;</span></pre></body></html></div>
 </li>
 <li>
 <p>For a public file that we may have seen referenced in a published article, we may already have the GUID, and so can retrieve the file directly before downloading it. Here, we’ll download Daniel Laken’s helpful spreadsheet for calculating effect sizes (<a href="https://osf.io/vbdah/" class="uri">https://osf.io/vbdah/</a>).</p>
