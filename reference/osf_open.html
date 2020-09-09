@@ -145,7 +145,7 @@ web browser." />
 web browser.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>osf_open</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>osf_open</span>(<span class='kw'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,14 +163,15 @@ web browser.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># Navigate to a project based on its GUID</span>
 <span class='fu'>osf_open</span>(<span class='st'>"e81xl"</span>)
 
 <span class='co'># You can also provide an osf_tbl subclass</span>
-<span class='no'>crp_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='osf_retrieve.html'>osf_retrieve_file</a></span>(<span class='st'>"ucpye"</span>)
-<span class='fu'>osf_open</span>(<span class='no'>crp_file</span>)
-}</div></pre>
+<span class='kw'>crp_file</span> <span class='op'>&lt;-</span> <span class='fu'><a href='osf_retrieve.html'>osf_retrieve_file</a></span>(<span class='st'>"ucpye"</span>)
+<span class='fu'>osf_open</span>(<span class='kw'>crp_file</span>)
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -186,7 +187,7 @@ web browser.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

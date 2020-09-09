@@ -94,7 +94,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Getting Started with osfr</h1>
             
-            <h4 class="date">2020-09-02</h4>
+            <h4 class="date">2020-09-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/aaronwolen/osfr/blob/master/vignettes/getting_started.Rmd"><code>vignettes/getting_started.Rmd</code></a></small>
       <div class="hidden name"><code>getting_started.Rmd</code></div>
@@ -104,11 +104,13 @@
     
     
 <p>This vignette provides a quick tour of the <code>osfr</code> package.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">osfr</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://aaronwolen.github.io/osfr">osfr</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://dplyr.tidyverse.org">dplyr</a></span>)
 
 <span class="co"># external file for our example project</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span>(<span class="no">mtcars</span>, <span class="st">"mtcars.csv"</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span>(<span class="kw">mtcars</span>, <span class="st">"mtcars.csv"</span>)
+</pre></div>
 <div id="background" class="section level2">
 <h2 class="hasAnchor">
 <a href="#background" class="anchor"></a>Background</h2>
@@ -125,34 +127,42 @@
 <p>At the start of a new research project or study we’ll want to set up a new private project on OSF to store all the files related to the project. We can add multiple nested components or directories to create whatever structure will suite our workflow. Different components can have different DOIs and different privacy settings, so we may want to put similar files in their own components to organize the project.</p>
 <p>We’ll first create a new <em>project</em> and store osfr’s response in the <code>car_project</code> object. This object contains a specialized data frame based on the <a href="https://tibble.tidyverse.org">tibble</a> class that provides the new project’s global unique identifier (GUID), title, and other metadata returned by the API.</p>
 <p><em>Note: You’ll need to be authenticated to create <code>nodes</code>. See the <code><a href="../reference/osf_auth.html">osf_auth()</a></code> function documentation or the <code>auth</code> vignette for more information.</em></p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">car_project</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/osf_create.html">osf_create_project</a></span>(<span class="st">"Motor Trend Car Road Tests"</span>)
-<span class="no">car_project</span>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="kw">car_project</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/osf_create.html">osf_create_project</a></span>(<span class="st">"Motor Trend Car Road Tests"</span>)
+<span class="kw">car_project</span>
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;   name                       id    meta            </span>
 <span class="co">#&gt;   &lt;chr&gt;                      &lt;chr&gt; &lt;list&gt;          </span>
-<span class="co">#&gt; 1 Motor Trend Car Road Tests sc7q8 &lt;named list [3]&gt;</span></pre></body></html></div>
+<span class="co">#&gt; 1 Motor Trend Car Road Tests ud24r &lt;named list [3]&gt;</span>
+</pre></div>
 <p>To view the project directly on OSF use <code><a href="../reference/osf_open.html">osf_open(car_project)</a></code>.</p>
 <p>After the project is created we’ll create two nested <em>components</em>, one for data and one for analysis scripts. We can take advantage of osfr’s <a href="https://magrittr.tidyverse.org">pipe</a>-compatibility to arrange multiple operations into a single sequence.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">scripts_comp</span> <span class="kw">&lt;-</span> <span class="no">car_project</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/osf_create.html">osf_create_component</a></span>(<span class="st">"Data"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/osf_create.html">osf_create_component</a></span>(<span class="st">"Analysis Scripts"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="kw">scripts_comp</span> <span class="op">&lt;-</span> <span class="kw">car_project</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/osf_create.html">osf_create_component</a></span>(<span class="st">"Data"</span>) <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/osf_create.html">osf_create_component</a></span>(<span class="st">"Analysis Scripts"</span>)
+</pre></div>
 <p>Because each operation in the sequence above applies to the previous object, we’ve accidentally created a project with the <code>analysis scripts</code> component nested within the <code>data</code> component, which is not what we wanted. We can delete the analysis scripts component and recreate it under the top-level project.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/osf_rm.html">osf_rm</a></span>(<span class="no">scripts_comp</span>, <span class="kw">check</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu"><a href="../reference/osf_rm.html">osf_rm</a></span>(<span class="kw">scripts_comp</span>, check = <span class="fl">FALSE</span>)
 
-<span class="no">car_project</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/osf_create.html">osf_create_component</a></span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"Analysis Scripts"</span>)
+<span class="kw">car_project</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/osf_create.html">osf_create_component</a></span>(title = <span class="st">"Analysis Scripts"</span>)
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;   name             id    meta            </span>
 <span class="co">#&gt;   &lt;chr&gt;            &lt;chr&gt; &lt;list&gt;          </span>
-<span class="co">#&gt; 1 Analysis Scripts p68zy &lt;named list [3]&gt;</span></pre></body></html></div>
+<span class="co">#&gt; 1 Analysis Scripts 2xduy &lt;named list [3]&gt;</span>
+</pre></div>
 <p>We can verify the project is now structured the way we wanted by listing the components we have under the main project.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">car_components</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/osf_ls_nodes.html">osf_ls_nodes</a></span>(<span class="no">car_project</span>)
-<span class="no">car_components</span>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="kw">car_components</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/osf_ls_nodes.html">osf_ls_nodes</a></span>(<span class="kw">car_project</span>)
+<span class="kw">car_components</span>
 <span class="co">#&gt; # A tibble: 2 x 3</span>
 <span class="co">#&gt;   name             id    meta            </span>
 <span class="co">#&gt;   &lt;chr&gt;            &lt;chr&gt; &lt;list&gt;          </span>
-<span class="co">#&gt; 1 Analysis Scripts p68zy &lt;named list [3]&gt;</span>
-<span class="co">#&gt; 2 Data             v9jf8 &lt;named list [3]&gt;</span></pre></body></html></div>
+<span class="co">#&gt; 1 Analysis Scripts 2xduy &lt;named list [3]&gt;</span>
+<span class="co">#&gt; 2 Data             wzdj9 &lt;named list [3]&gt;</span>
+</pre></div>
 <p>Remember, new projects are always private by default. You can change this by opening the project on OSF and <a href="https://help.osf.io/hc/en-us/articles/360018981414-control-your-privacy-settings">making it public</a>, and <a href="https://help.osf.io/hc/en-us/articles/360019931013-Create-DOIs">even generate a DOI</a> so others can cite your work.</p>
 </div>
 </div>
@@ -166,18 +176,20 @@
 <p>To add our data file to the <em>Data</em> component within our project, we’ll need to pass an <code>osf_tbl</code> containing only that component to the <code><a href="../reference/osf_upload.html">osf_upload()</a></code> function, so the file is uploaded to the correct part of the project.</p>
 <p><em><strong>Note:</strong> If an <code>osf_tbl</code> with multiple entities is passed to an osfr function, the default behavior is to use the entity in the first row and warn that all other entities are ignored.</em></p>
 <p>osfr is compatible with the dplyr package, so we can <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> for the specific component we want.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://dplyr.tidyverse.org">dplyr</a></span>)
 
 <span class="co"># select the data component</span>
-<span class="no">data_component</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">car_components</span>, <span class="no">name</span> <span class="kw">==</span> <span class="st">"Data"</span>)
+<span class="kw">data_component</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="kw">car_components</span>, <span class="kw">name</span> <span class="op">==</span> <span class="st">"Data"</span>)
 
 <span class="co"># upload our file</span>
-<span class="no">mtcars_file</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/osf_upload.html">osf_upload</a></span>(<span class="no">data_component</span>, <span class="kw">path</span> <span class="kw">=</span> <span class="st">"mtcars.csv"</span>)
-<span class="no">mtcars_file</span>
+<span class="kw">mtcars_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/osf_upload.html">osf_upload</a></span>(<span class="kw">data_component</span>, path = <span class="st">"mtcars.csv"</span>)
+<span class="kw">mtcars_file</span>
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;   name       id                       meta            </span>
 <span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt;                    &lt;list&gt;          </span>
-<span class="co">#&gt; 1 mtcars.csv 5f4fe65cb08bdd0009d4d1f8 &lt;named list [3]&gt;</span></pre></body></html></div>
+<span class="co">#&gt; 1 mtcars.csv 5f591fa6f2bcb50009e2266d &lt;named list [3]&gt;</span>
+</pre></div>
 <p>The <code>mtcars_file</code> object now contains an <code>osf_tbl</code> with 1 row corresponding to the version of that file stored on OSF. We can also use <code><a href="../reference/osf_open.html">osf_open()</a></code> to examine the file directly on OSF, which provides rendered views for a wide variety of file formats.</p>
 <p>OSF also version controls files, which means that if we were to make a change to the <code>mtcars.csv</code> file (perhaps we collected more data) we could automatically create a 2nd version of the dataset by using the <code><a href="../reference/osf_upload.html">osf_upload()</a></code> function and setting <code>conflicts = "overwrite"</code>. As long as the file we’re uploading has the same file name as a file in that particular section of the project, a new version will be created.</p>
 </div>
@@ -188,18 +200,22 @@
 <ol style="list-style-type: decimal">
 <li>
 <p>If we know where the file is located, but don’t remember it’s GUID, we can use the <code>osf_ls_files</code> function to list all the files within a specified node and then pipe the results to <code><a href="../reference/osf_download.html">osf_download()</a></code>.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">data_component</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/osf_ls_files.html">osf_ls_files</a></span>() <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/osf_download.html">osf_download</a></span>(<span class="kw">conflicts</span> <span class="kw">=</span> <span class="st">"overwrite"</span>)
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="kw">data_component</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/osf_ls_files.html">osf_ls_files</a></span>() <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/osf_download.html">osf_download</a></span>(conflicts = <span class="st">"overwrite"</span>)
 <span class="co">#&gt; # A tibble: 1 x 4</span>
 <span class="co">#&gt;   name       id                       local_path   meta            </span>
 <span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt;                    &lt;chr&gt;        &lt;list&gt;          </span>
-<span class="co">#&gt; 1 mtcars.csv 5f4fe65cb08bdd0009d4d1f8 ./mtcars.csv &lt;named list [3]&gt;</span></pre></body></html></div>
+<span class="co">#&gt; 1 mtcars.csv 5f591fa6f2bcb50009e2266d ./mtcars.csv &lt;named list [3]&gt;</span>
+</pre></div>
 </li>
 <li>
 <p>For a public file that we may have seen referenced in a published article, we may already have the GUID, and so can retrieve the file directly before downloading it. Here, we’ll download Daniel Laken’s helpful spreadsheet for calculating effect sizes (<a href="https://osf.io/vbdah/" class="uri">https://osf.io/vbdah/</a>).</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">excel_file</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/osf_retrieve.html">osf_retrieve_file</a></span>(<span class="st">"vbdah"</span>)
-<span class="fu"><a href="../reference/osf_download.html">osf_download</a></span>(<span class="no">excel_file</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="kw">excel_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/osf_retrieve.html">osf_retrieve_file</a></span>(<span class="st">"vbdah"</span>)
+<span class="fu"><a href="../reference/osf_download.html">osf_download</a></span>(<span class="kw">excel_file</span>)
+</pre></div>
 </li>
 </ol>
 </div>
@@ -233,7 +249,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

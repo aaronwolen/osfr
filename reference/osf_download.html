@@ -150,12 +150,12 @@ your working directory by default.</p>
     </div>
 
     <pre class="usage"><span class='fu'>osf_download</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>recurse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>conflicts</span> <span class='kw'>=</span> <span class='st'>"error"</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>progress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+  <span class='kw'>x</span>,
+  path = <span class='kw'>NULL</span>,
+  recurse = <span class='fl'>FALSE</span>,
+  conflicts = <span class='st'>"error"</span>,
+  verbose = <span class='fl'>FALSE</span>,
+  progress = <span class='fl'>FALSE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -237,14 +237,15 @@ existing file is the more recent copy. You have been warned.</p>
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># download a single file</span>
-<span class='no'>analysis_plan</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='osf_retrieve.html'>osf_retrieve_file</a></span>(<span class='st'>"2ryha"</span>) <span class='kw'>%&gt;%</span>
+<span class='kw'>analysis_plan</span> <span class='op'>&lt;-</span> <span class='fu'><a href='osf_retrieve.html'>osf_retrieve_file</a></span>(<span class='st'>"2ryha"</span>) <span class='op'>%&gt;%</span>
   <span class='fu'>osf_download</span>()
 
 <span class='co'># verify the file was downloaded locally</span>
-<span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.exists</a></span>(<span class='no'>analysis_plan</span>$<span class='no'>local_path</span>)
-}</div></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.exists</a></span>(<span class='kw'>analysis_plan</span><span class='op'>$</span><span class='kw'>local_path</span>)
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -260,7 +261,7 @@ existing file is the more recent copy. You have been warned.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

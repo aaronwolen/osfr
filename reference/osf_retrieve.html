@@ -149,11 +149,11 @@ file, or user based on the associated unique identifier. Usually this is a
 could also be an 11-character Waterbutler ID. See below for details.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>osf_retrieve_user</span>(<span class='no'>id</span>)
+    <pre class="usage"><span class='fu'>osf_retrieve_user</span>(<span class='kw'>id</span>)
 
-<span class='fu'>osf_retrieve_node</span>(<span class='no'>id</span>)
+<span class='fu'>osf_retrieve_node</span>(<span class='kw'>id</span>)
 
-<span class='fu'>osf_retrieve_file</span>(<span class='no'>id</span>)</pre>
+<span class='fu'>osf_retrieve_file</span>(<span class='kw'>id</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -207,7 +207,7 @@ storage service. Support for additional storage providers is planned for a
 future release.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
  <span class='co'># retrieve your own OSF user profile (must be authenticated, ?osf_auth)</span>
  <span class='fu'>osf_retrieve_user</span>(<span class='st'>"me"</span>)
 
@@ -216,7 +216,8 @@ future release.</p>
 
 <span class='co'># get the first figure from the P:RP</span>
 <span class='fu'>osf_retrieve_file</span>(<span class='st'>"https://osf.io/7js8c"</span>)
-}</div></pre>
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -232,7 +233,7 @@ future release.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>
