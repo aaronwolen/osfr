@@ -1,8 +1,10 @@
 pandoc: '2.2'
-pkgdown: 1.6.0
+pkgdown: 1.6.1
 pkgdown_sha: ~
-articles: []
-last_built: 2020-09-09T18:31Z
+articles:
+  auth: auth.html
+  getting_started: getting_started.html
+last_built: 2020-09-30T18:32Z
 urls:
   reference: https://aaronwolen.github.io/osfr//reference
   article: https://aaronwolen.github.io/osfr//articles

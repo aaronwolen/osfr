@@ -155,7 +155,7 @@ the middle of a session. See below for additional details and instructions
 for generating and utilizing your PAT.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>osf_auth</span>(token = <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>osf_auth</span><span class='op'>(</span>token <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -206,7 +206,7 @@ your script.</p>
 <code>OSF_PAT</code>. Doing so will allow osfr to detect and utilize the token
 automatically without any need to manually call <code>osf_auth()</code>. One way to
 accomplish this is by creating an <code>.Renviron</code> file in your home or working
-directory that defines the <code>OSF_PAT</code> variable. For example:</p><pre><span class='kw'>OSF_PAT</span><span class='op'>=</span><span class='kw'>bdEEFMCuBtaBoSK11YzyjOdjUjKtWIj2FWxHl6kTBRax7uaeyBghALumTO1kT8RA</span>
+directory that defines the <code>OSF_PAT</code> variable. For example:</p><pre><span class='va'>OSF_PAT</span><span class='op'>=</span><span class='va'>bdEEFMCuBtaBoSK11YzyjOdjUjKtWIj2FWxHl6kTBRax7uaeyBghALumTO1kT8RA</span>
 </pre>
 
 <p>For new users we suggest adding the <code>.Renviron</code> to your home directory so it
@@ -223,10 +223,10 @@ O'Reilly Press. <a href='https://csgillespie.github.io/efficientR'>https://csgil
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># manually authenticate with a PAT</span>
-<span class='fu'>osf_auth</span>(<span class='st'>"bdEEFMCuBtaBoSK11YzyjOdjUjKtWIj2FWxHl6kTBRax7uaeyBghALumTO1kT8RA"</span>)
-}
+<span class='fu'>osf_auth</span><span class='op'>(</span><span class='st'>"bdEEFMCuBtaBoSK11YzyjOdjUjKtWIj2FWxHl6kTBRax7uaeyBghALumTO1kT8RA"</span><span class='op'>)</span>
+<span class='op'>}</span>
 
 </div></pre>
   </div>
@@ -244,7 +244,7 @@ O'Reilly Press. <a href='https://csgillespie.github.io/efficientR'>https://csgil
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

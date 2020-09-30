@@ -143,14 +143,14 @@
     <p>Upload local files to a project, component, or directory on OSF.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>osf_upload</span>(
-  <span class='kw'>x</span>,
-  <span class='kw'>path</span>,
-  recurse = <span class='fl'>FALSE</span>,
-  conflicts = <span class='st'>"error"</span>,
-  progress = <span class='fl'>FALSE</span>,
-  verbose = <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>osf_upload</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  <span class='va'>path</span>,
+  recurse <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  conflicts <span class='op'>=</span> <span class='st'>"error"</span>,
+  progress <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  verbose <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -218,7 +218,7 @@ following would would upload both <code>a.txt</code> and <code>b.txt</code> to t
 created at the root of the OSF destination, <code>x</code>, and any files within the
 local directory are uploaded to the new OSF directory. Therefore, we could
 maintain the directory structure in the above example by passing <code>b.txt</code>'s
-parent directory to <code>path</code> instead of the file itself:</p><pre><span class='fu'>osf_upload</span>(<span class='kw'>my_proj</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a.txt"</span>, <span class='st'>"subdir2"</span>))
+parent directory to <code>path</code> instead of the file itself:</p><pre><span class='fu'>osf_upload</span><span class='op'>(</span><span class='va'>my_proj</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a.txt"</span>, <span class='st'>"subdir2"</span><span class='op'>)</span><span class='op'>)</span>
 </pre>
 
 <p>Likewise, <code>osf_upload(my_proj, path = ".")</code> will upload your entire current
@@ -232,9 +232,9 @@ to retrieve the directory as an <code><a href='osf_tbl.html'>osf_tbl_file</a></c
 passing the directory's unique identifier to <code><a href='osf_retrieve.html'>osf_retrieve_file()</a></code>, or, if
 you don't have the ID handy, you can use <code><a href='osf_ls_files.html'>osf_ls_files()</a></code> to retrieve the
 directory by name.</p><pre><span class='co'># search for the 'rawdata' subdirectory within top-level 'data' directory</span>
-<span class='kw'>target_dir</span> <span class='op'>&lt;-</span> <span class='fu'><a href='osf_ls_files.html'>osf_ls_files</a></span>(<span class='kw'>my_proj</span>, path = <span class='st'>"data"</span>, pattern = <span class='st'>"rawdata"</span>)
+<span class='va'>target_dir</span> <span class='op'>&lt;-</span> <span class='fu'><a href='osf_ls_files.html'>osf_ls_files</a></span><span class='op'>(</span><span class='va'>my_proj</span>, path <span class='op'>=</span> <span class='st'>"data"</span>, pattern <span class='op'>=</span> <span class='st'>"rawdata"</span><span class='op'>)</span>
 <span class='co'># upload 'a.txt' to data/rawdata/ on OSF</span>
-<span class='fu'>osf_upload</span>(<span class='kw'>target_dir</span>, path = <span class='st'>"a.txt"</span>)
+<span class='fu'>osf_upload</span><span class='op'>(</span><span class='va'>target_dir</span>, path <span class='op'>=</span> <span class='st'>"a.txt"</span><span class='op'>)</span>
 </pre>
 
     <h2 class="hasAnchor" id="a-note-about-synchronization"><a class="anchor" href="#a-note-about-synchronization"></a>A note about synchronization</h2>
@@ -258,20 +258,20 @@ existing file is the more recent copy. You have been warned.</p>
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># Create an example file to upload to our example project</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/write.table.html'>write.csv</a></span>(<span class='kw'>iris</span>, file = <span class='st'>"iris.csv"</span>)
-<span class='kw'>project</span> <span class='op'>&lt;-</span> <span class='fu'><a href='osf_create.html'>osf_create_project</a></span>(<span class='st'>"Flower Data"</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/write.table.html'>write.csv</a></span><span class='op'>(</span><span class='va'>iris</span>, file <span class='op'>=</span> <span class='st'>"iris.csv"</span><span class='op'>)</span>
+<span class='va'>project</span> <span class='op'>&lt;-</span> <span class='fu'><a href='osf_create.html'>osf_create_project</a></span><span class='op'>(</span><span class='st'>"Flower Data"</span><span class='op'>)</span>
 
 <span class='co'># Upload the first version</span>
-<span class='fu'>osf_upload</span>(<span class='kw'>project</span>,<span class='st'>"iris.csv"</span>)
+<span class='fu'>osf_upload</span><span class='op'>(</span><span class='va'>project</span>,<span class='st'>"iris.csv"</span><span class='op'>)</span>
 
 <span class='co'># Modify the data file, upload version 2, and view it on OSF</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/write.table.html'>write.csv</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span>(<span class='kw'>iris</span>, <span class='kw'>Species</span> != <span class='st'>"setosa"</span>), file = <span class='st'>"iris.csv"</span>)
-<span class='kw'>project</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>osf_upload</span>(<span class='st'>"iris.csv"</span>, overwrite = <span class='fl'>TRUE</span>) <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='osf_open.html'>osf_open</a></span>()
-}
+<span class='fu'><a href='https://rdrr.io/r/utils/write.table.html'>write.csv</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span><span class='va'>iris</span>, <span class='va'>Species</span> <span class='op'>!=</span> <span class='st'>"setosa"</span><span class='op'>)</span>, file <span class='op'>=</span> <span class='st'>"iris.csv"</span><span class='op'>)</span>
+<span class='va'>project</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>osf_upload</span><span class='op'>(</span><span class='st'>"iris.csv"</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='osf_open.html'>osf_open</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>}</span>
 
 </div></pre>
   </div>
@@ -289,7 +289,7 @@ existing file is the more recent copy. You have been warned.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
